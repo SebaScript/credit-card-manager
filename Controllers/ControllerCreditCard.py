@@ -1,7 +1,7 @@
 import sys
 import psycopg2
 import SecretConfig
-
+from datetime import date
 from Models.CreditCard import CreditCard
 
 
@@ -23,7 +23,7 @@ def create_table():
     Creates  table if it does not exist
     """
     sql = ""
-    with open("sql/create-credit-card.sql", "r") as f:
+    with open("../sql/create-credit-card.sql", "r") as f:
         sql = f.read()
 
     cursor = get_cursor()
@@ -31,8 +31,10 @@ def create_table():
     try:
         cursor.execute(sql)
         cursor.connection.commit()
-    except:
+        print("table created succesfully")
+    except Exception as err:
         # Table already exists
+        print(err)
         cursor.connection.rollback()
 
 
@@ -61,6 +63,9 @@ def delete_single_credit_card(credit_card):
     Deletes a single credit card from the table
     """
     sql = f"DELETE FROM credit_cards WHERE card_number = '{credit_card.card_number}'"
+    cursor = get_cursor()
+    cursor.execute(sql)
+    cursor.connection.commit()
 
 
 def insert_credit_card(credit_card: CreditCard):
@@ -86,6 +91,11 @@ def insert_credit_card(credit_card: CreditCard):
         insert_credit_card(credit_card)
         cursor.connection.commit()
 
-    except:
+    except Exception as err:
+        print(err)
         cursor.connection.rollback()
-        raise Exception(f"Could not insert credit card: {credit_card.card_number}")
+
+
+create_table()
+creditcard = CreditCard(123, 123, "ola", "como", date.fromisoformat("2050-11-11"), "BISA", "12", 15600, 3.10)
+insert_credit_card(creditcard)
