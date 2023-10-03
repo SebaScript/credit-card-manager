@@ -1,4 +1,8 @@
 from datetime import date
+import Exceptions
+
+
+MAXANUALINTEREST = 100
 
 
 class CreditCard:
@@ -17,3 +21,40 @@ class CreditCard:
         self.monthly_fee: float = monthly_fee
         self.interest_rate: float = interest_rate
         self.payment_plans: list = []
+        self.ANUALINTEREST = self.interest_rate * 12
+        self.interest_percentage = self.interest_rate/100
+
+    def calc_monthly_payment(self, amount, installments) -> float:
+        """
+        Calculates the monthly payment for an installment purchase
+        """
+        if amount == 0:
+            raise Exceptions.ZeroAmountError
+        elif installments <= 0:
+            raise Exceptions.NegativeNumberOfPaymentsError
+        if self.interest_rate == 0:
+            return amount * installments
+        if installments == 1:
+            return amount
+        else:
+            return (amount * self.interest_percentage)/(1 - (1 + self.interest_percentage)**(-installments))
+
+    def calc_total_interest(self, amount, installments) -> float:
+        """
+        calculates the total interest payment for an installment purchase
+        """
+        payment_value: float = self.calc_monthly_payment(amount, installments)
+        total_interest: float = (payment_value * installments) - amount
+        return total_interest
+
+    def calc_planned_saving(self, amount, installments) -> int:
+        """
+        calculates the number of months that the user should save to make the same
+        purchase instead of buying it in installments
+        """
+        monthly_payment = self.calc_monthly_payment(amount, installments)
+        months_saving: int = 0
+        while monthly_payment < amount:
+            monthly_payment += monthly_payment
+            months_saving += 1
+        return months_saving

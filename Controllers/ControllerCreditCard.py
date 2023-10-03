@@ -31,7 +31,6 @@ def create_table():
     try:
         cursor.execute(sql)
         cursor.connection.commit()
-        print("table created succesfully")
     except Exception as err:
         # Table already exists
         print(err)
@@ -72,7 +71,6 @@ def insert_credit_card(credit_card: CreditCard):
     """
     Saves a credit_card in the database
     """
-
     cursor = get_cursor()
 
     try:
@@ -81,14 +79,14 @@ def insert_credit_card(credit_card: CreditCard):
         INSERT INTO credit_cards (
             card_number, owner_id, owner_name, bank_name, due_date, franchise, payment_day, monthly_fee, interest_rate
         )
-        VALUES (
+        VALUES
+        (
             '{credit_card.card_number}', '{credit_card.owner_id}', '{credit_card.owner_name}', 
             '{credit_card.bank_name}', '{credit_card.due_date}', '{credit_card.franchise}', {credit_card.payment_day},
             '{credit_card.monthly_fee}', '{credit_card.interest_rate}'
         );
                         """)
 
-        insert_credit_card(credit_card)
         cursor.connection.commit()
 
     except Exception as err:

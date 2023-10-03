@@ -1,6 +1,8 @@
 import sys
 import psycopg2
 import SecretConfig
+from datetime import date
+from ControllerCreditCard import CreditCard
 
 from Models.PaymentPlan import PaymentPlan
 
@@ -23,7 +25,7 @@ def create_table():
     Creates  table if it does not exist
     """
     sql = ""
-    with open("sql/create-payment-plan.sql", "r") as f:
+    with open("../sql/create-payment-plan.sql", "r") as f:
         sql = f.read()
 
     cursor = get_cursor()
@@ -56,5 +58,29 @@ def delete_all_rows():
     cursor.connection.commit()
 
 
-def insert_payment_plan(payment_plan: PaymentPlan):
+def insert_payment_plan(card_number, purchase_amount, purchase_date, installments):
+
+    cursor = get_cursor()
+    sql = f"""SELECT card_number, owner_id, owner_name, bank_name, due_date, franchise, payment_day, monthly_fee, 
+    interest_rate FROM credit_cards WHERE card_number = '{card_number}'"""
+    cursor.execute(sql)
+    row = cursor.fetchone()
+
+    if row is None:
+        raise Exception(f"record with card number: {card_number} was not found")
+
+    credit_card = CreditCard(row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7], row[8])
+
+    payment_plan = PaymentPlan(card_number, purchase_date, purchase_amount)
+
+    table = payment_plan.calc_payment_plan(credit_card, installments)
+
+    print(table)
+
+
+def sum_month_installments(self):
     pass
+
+
+create_table()
+insert_payment_plan(123, 452, date.fromisoformat("2023-10-02"), 10)
