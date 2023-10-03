@@ -20,7 +20,6 @@ class CreditCard:
         self.payment_day: int = payment_day
         self.monthly_fee: float = monthly_fee
         self.interest_rate: float = interest_rate
-        self.payment_plans: list = []
         self.ANUALINTEREST = self.interest_rate * 12
         self.interest_percentage = self.interest_rate/100
 
@@ -33,18 +32,16 @@ class CreditCard:
         elif installments <= 0:
             raise Exceptions.NegativeNumberOfPaymentsError
         if self.interest_rate == 0:
-            return amount * installments
+            return amount / installments
         if installments == 1:
             return amount
         else:
-            return (amount * self.interest_percentage)/(1 - (1 + self.interest_percentage)**(-installments))
+            return round((amount * self.interest_percentage)/(1 - (1 + self.interest_percentage)**(-installments)), 4)
 
     def calc_total_interest(self, amount, installments) -> float:
-        """
-        calculates the total interest payment for an installment purchase
-        """
+        """calculates the total interest payment for an installment purchase"""
         payment_value: float = self.calc_monthly_payment(amount, installments)
-        total_interest: float = (payment_value * installments) - amount
+        total_interest: float = round((payment_value * installments) - amount, 2)
         return total_interest
 
     def calc_planned_saving(self, amount, installments) -> int:

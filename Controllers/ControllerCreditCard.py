@@ -3,6 +3,7 @@ import psycopg2
 import SecretConfig
 from datetime import date
 from Models.CreditCard import CreditCard
+import Exceptions
 
 
 def get_cursor():
@@ -31,6 +32,7 @@ def create_table():
     try:
         cursor.execute(sql)
         cursor.connection.commit()
+        print("Table created succesfully")
     except Exception as err:
         # Table already exists
         print(err)
@@ -68,10 +70,23 @@ def delete_single_credit_card(credit_card):
 
 
 def insert_credit_card(credit_card: CreditCard):
-    """
-    Saves a credit_card in the database
-    """
+    """Saves a credit_card in the database"""
+
     cursor = get_cursor()
+
+    try:
+
+        card_number_search = search_by_card_id(credit_card.card_number)
+
+        if card_number_search is None:
+            pass
+        elif card_number_search.card_number == credit_card.card_number:
+            print("RAISED ASJKJASFASF")
+            raise Exceptions.CreditCardAlreadyExists
+    except Exceptions.CardNotFoundError:
+        pass
+    except Exceptions.CreditCardAlreadyExists:
+        raise Exceptions.CreditCardAlreadyExists
 
     try:
 
@@ -88,12 +103,25 @@ def insert_credit_card(credit_card: CreditCard):
                         """)
 
         cursor.connection.commit()
-
+        print("Credit card saved succesfully")
     except Exception as err:
         print(err)
         cursor.connection.rollback()
 
 
-create_table()
-creditcard = CreditCard(123, 123, "ola", "como", date.fromisoformat("2050-11-11"), "BISA", "12", 15600, 3.10)
-insert_credit_card(creditcard)
+def search_by_card_id(card_number):
+    cursor = get_cursor()
+    cursor.execute(f"""SELECT card_number, owner_id, owner_name, bank_name, due_date, franchise, payment_day, monthly_fee, 
+    interest_rate FROM credit_cards where card_number = '{card_number}'""")
+    row = cursor.fetchone()
+
+    if row is None:
+        raise Exceptions.CardNotFoundError
+
+    result = CreditCard(row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7], row[8])
+    return result
+
+# delete_table()
+# create_table()
+# creditcard = CreditCard(556677, 123, "ola", "como", date.fromisoformat("2050-11-11"), "BISA", 10, 15600, 3.10)
+# insert_credit_card(creditcard)

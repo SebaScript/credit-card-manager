@@ -7,4 +7,8 @@ class NegativeNumberOfPaymentsError(Exception):
 
 
 class CardNotFoundError(Exception):
-    print("the indicated card does not exist")
+    print("The indicated card does not exist")
+
+
+class CreditCardAlreadyExists(Exception):
+    print("The credit card already exists")

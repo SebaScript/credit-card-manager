@@ -1,4 +1,5 @@
 CREATE TABLE payment_plans (
+    Number VARCHAR( 10000 ) NOT NULL,
     card_number VARCHAR( 20 ) NOT NULL,
     purchase_date DATE,
     purchase_amount FLOAT,
