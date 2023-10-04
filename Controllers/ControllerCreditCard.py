@@ -81,7 +81,6 @@ def insert_credit_card(credit_card: CreditCard):
         if card_number_search is None:
             pass
         elif card_number_search.card_number == credit_card.card_number:
-            print("RAISED ASJKJASFASF")
             raise Exceptions.CreditCardAlreadyExists
     except Exceptions.CardNotFoundError:
         pass

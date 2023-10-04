@@ -2,7 +2,7 @@ import sys
 import psycopg2
 import SecretConfig
 from datetime import date
-from ControllerCreditCard import CreditCard
+from Models.CreditCard import CreditCard
 
 from Models.PaymentPlan import PaymentPlan
 
@@ -74,7 +74,7 @@ def insert_payment_plan(card_number, purchase_amount, purchase_date, installment
     payment_plan = PaymentPlan(card_number, purchase_date, purchase_amount)
 
     table = payment_plan.calc_payment_plan(credit_card, installments)
-
+    print(table)
     for row in table:
         sql = f"""INSERT INTO payment_plans(
             Number, card_number, purchase_date, purchase_amount, payment_date, payment_amount, interest_amount,
@@ -87,21 +87,30 @@ def insert_payment_plan(card_number, purchase_amount, purchase_date, installment
     cursor.connection.commit()
 
 
-def calc_total_payment_in_x_months(months) -> float:
+def get_payment_plan():
+
+    cursor = get_cursor()
+    cursor.execute("""SELECT * FROM payment_plans""")
+    payment_plan = cursor.fetchall()
+
+    payment_plan_converted = [list(tuple) for tuple in payment_plan]  # Converts from list of tuples to list of lists
+    return payment_plan_converted
+
+
+def calc_total_payment_in_x_interval(initial_date: date, final_date: date):
     """Calculates the sum of the monthly payments in a specified range of months"""
     cursor = get_cursor()
-    sum: float = 0
-    for i in range(months+1):
-        if i == 0:
-            continue
-        print(i)
-        cursor.execute(f"SELECT payment_amount FROM payment_plans WHERE number = '{i}'")
-        result = cursor.fetchone()
-        sum += result[0]
-    return sum
+    cursor.execute(f"""SELECT payment_amount FROM payment_plans WHERE payment_date >= '{initial_date}'
+                        and payment_date <= '{final_date}'
+                    """)
+    amounts = cursor.fetchall()
+    total: float = 0
+    for amount in amounts:
+        total += amount[0]
 
+    return total
 
-delete_table()
-create_table()
-insert_payment_plan(556677, 200000, date.fromisoformat("2023-09-02"), 36)
-print(calc_total_payment_in_x_months(2))
+# delete_table()
+# create_table()
+# insert_payment_plan(556677, 200000, date.fromisoformat("2023-09-02"), 36)
+# print(calc_total_payment_in_x_interval(date.fromisoformat("2023-10-11"), date.fromisoformat("2024-02-10")))

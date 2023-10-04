@@ -6,10 +6,8 @@ from Models.CreditCard import CreditCard
 from Controllers import ControllerCreditCard
 
 
-class ControllerCreditCardTest(unittest.TestCase):
-    """
-    Tests for the Controller Class of the credit card
-    """
+class TestControllerCreditCard(unittest.TestCase):
+    """Tests for the Controller Class of the credit card"""
 
     # TEST FIXTURES
     # Code that runs before each test
@@ -18,10 +16,6 @@ class ControllerCreditCardTest(unittest.TestCase):
         """ Executed at the beginning of all tests """
         print("Invoking setUpClass")
         ControllerCreditCard.create_table()  # Ensure that at the beginning of the tests, the table is created
-
-    def tearDown(self):
-        """ Executed at the end of each test """
-        print("Invoking tearDown")
 
     def tearDownClass():
         """ Executed at the end of all tests """
