@@ -244,16 +244,13 @@ class TestControllerCreditCard(unittest.TestCase):
 
         self.assertRaises(Exceptions.NegativeNumberOfPaymentsError, credit_card.calc_monthly_payment, amount, installments)
 
-    # def test_02_credit_card_purchase_7(self):
-    #     amount: float = 50000
-    #     card_number: str = "885522"
-    #     installments: int = 10
-    #
-    #     searched_card = ControllerCreditCard.search_by_card_id(card_number)
-    #
-    #     credit_card = CreditCard(searched_card.card_number, searched_card.owner_id, searched_card.owner_name,
-    #                              searched_card.bank_name, searched_card.due_date, searched_card.franchise,
-    #                              searched_card.payment_day, searched_card.monthly_fee, searched_card.interest_rate)
-    #
-    #     self.assertRaises(Exceptions.CardNotFoundError, credit_card.calc_monthly_payment, amount, installments)
+    def test_02_credit_card_purchase_7(self):
+        amount: float = 50000
+        card_number: str = "885522"
+        installments: int = 10
 
+        self.assertRaises(Exceptions.CardNotFoundError, ControllerCreditCard.search_by_card_id, card_number)
+
+
+if __name__ == '__main__':
+    unittest.main()

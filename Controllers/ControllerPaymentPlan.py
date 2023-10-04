@@ -74,7 +74,6 @@ def insert_payment_plan(card_number, purchase_amount, purchase_date, installment
     payment_plan = PaymentPlan(card_number, purchase_date, purchase_amount)
 
     table = payment_plan.calc_payment_plan(credit_card, installments)
-    print(table)
     for row in table:
         sql = f"""INSERT INTO payment_plans(
             Number, card_number, purchase_date, purchase_amount, payment_date, payment_amount, interest_amount,
@@ -108,7 +107,7 @@ def calc_total_payment_in_x_interval(initial_date: date, final_date: date):
     for amount in amounts:
         total += amount[0]
 
-    return total
+    return round(total)
 
 # delete_table()
 # create_table()

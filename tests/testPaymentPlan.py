@@ -22,8 +22,8 @@ class ControllerPaymentPlanTest(unittest.TestCase):
 
     def setUpClass():
         """ Executed at the beginning of all tests """
-        print("Invoking setUpClass")
         ControllerPaymentPlan.create_table()  # Ensure that at the beginning of the tests, the table is created
+        ControllerCreditCard.delete_all_rows()
         print("Invoking setUpClass")
         ControllerCreditCard.create_table()
         tests_credit_cards = testControllerCreditCards.TestControllerCreditCard()  # Ensure that at the beginning of the tests, the table is created
@@ -35,7 +35,6 @@ class ControllerPaymentPlanTest(unittest.TestCase):
     def tearDownClass():
         """ Executed at the end of all tests """
         print("Invoking tearDownClass")
-        ControllerPaymentPlan.delete_all_rows()
         ControllerCreditCard.delete_all_rows()
 
     def test_04_payment_plan_1(self):
@@ -81,7 +80,10 @@ class ControllerPaymentPlanTest(unittest.TestCase):
         installments: int = 1
 
         payment_plan = ControllerPaymentPlan.insert_payment_plan(card_number, amount, purchase_date, installments)
-        print(payment_plan)
         expected = [[1, '445566', datetime.date(2023, 11, 17), 90000, datetime.date(2023, 12, 5), 90000.0, 0.0, 90000.0, 0.0]]
         result = ControllerPaymentPlan.get_payment_plan()
         self.assertEqual(expected, result)
+
+
+if __name__ == '__main__':
+    unittest.main()

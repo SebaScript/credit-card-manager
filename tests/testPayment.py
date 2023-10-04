@@ -128,3 +128,7 @@ class TestPayment(unittest.TestCase):
         installments: int = 10
 
         self.assertRaises(Exceptions.CardNotFoundError, ControllerCreditCard.search_by_card_id, card_number)
+
+
+if __name__ == '__main__':
+    unittest.main()
