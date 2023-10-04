@@ -7,7 +7,7 @@ class PaymentPlan:
     Represents a payment plan in the system
     """
     def __init__(self, card_number, purchase_date, purchase_amount):
-        self.card_number = card_number
+        self.card_number: str = card_number
         self.purchase_date: date = purchase_date
         self.purchase_amount: float = purchase_amount
         self.payment_date: date = self.purchase_date
@@ -16,7 +16,7 @@ class PaymentPlan:
         self.balance: float = 0
         self.payment_amount: float = 0
 
-    def calc_payment_plan(self, credit_card: CreditCard, installments) -> list:
+    def calc_payment_plan(self, credit_card: CreditCard, installments: int) -> list:
         """Creates a payment plan"""
         payment_value: float = round(credit_card.calc_monthly_payment(self.purchase_amount, installments), 2)
         self.balance: float = self.purchase_amount
