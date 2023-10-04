@@ -6,7 +6,7 @@ from Models.CreditCard import CreditCard
 from Controllers import ControllerCreditCard
 
 
-class ControllerTest(unittest.TestCase):
+class ControllerCreditCardTest(unittest.TestCase):
     """
     Tests for the Controller Class of the credit card
     """
@@ -263,4 +263,3 @@ class ControllerTest(unittest.TestCase):
     #
     #     self.assertRaises(Exceptions.CardNotFoundError, credit_card.calc_monthly_payment, amount, installments)
 
-    
