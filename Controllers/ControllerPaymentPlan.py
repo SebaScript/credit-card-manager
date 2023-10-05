@@ -108,8 +108,3 @@ def calc_total_payment_in_x_interval(initial_date: date, final_date: date):
         total += amount[0]
 
     return round(total)
-
-# delete_table()
-# create_table()
-# insert_payment_plan(556677, 200000, date.fromisoformat("2023-09-02"), 36)
-# print(calc_total_payment_in_x_interval(date.fromisoformat("2023-10-11"), date.fromisoformat("2024-02-10")))

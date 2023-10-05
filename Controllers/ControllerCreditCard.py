@@ -119,8 +119,3 @@ def search_by_card_id(card_number):
 
     result = CreditCard(row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7], row[8])
     return result
-
-# delete_table()
-# create_table()
-# creditcard = CreditCard(556677, 123, "ola", "como", date.fromisoformat("2050-11-11"), "BISA", 10, 15600, 3.10)
-# insert_credit_card(creditcard)
