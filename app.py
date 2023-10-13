@@ -1,5 +1,4 @@
 from flask import Flask, request, jsonify
-from flask import render_template
 
 from Controllers import ControllerCreditCard, ControllerPaymentPlan
 from Models.CreditCard import CreditCard
@@ -8,12 +7,7 @@ from datetime import date
 
 app = Flask(__name__)
 
-
-@app.route('/params')
-def params():
-    return request.args
-
-
+#/api/card/new?card_number=123123&owner_id=13124&owner_name=ola&bank_name=ola&due_date=2028-09-12&franchise=ola&payment_day=09&monthly_fee=12000&interest_rate=3
 @app.route('/api/card/new')
 def insert_credit_card():
     try:
@@ -42,6 +36,7 @@ def insert_credit_card():
                 "message": "Request could not be completed",
                 "error": str(err)}
 
+#/api/simulate/purchase?card_number=123123&purchase_amount=50000&payments=24
 @app.route('/api/simulate/purchase')
 def simulate_purchase():
 
@@ -62,7 +57,7 @@ def simulate_purchase():
                 "message": "Request could not be completed",
                 "error": str(err)}
 
-
+#/api/simulate/saving?card_number=123123&purchase_amount=50000&payments=24
 @app.route('/api/simulate/saving')
 def simulate_planned_saving():
     """
@@ -88,7 +83,7 @@ def simulate_planned_saving():
                 "message": "Request could not be completed",
                 "error": str(err)}
 
-
+#/api/purchase/new?card_number=123123&purchase_amount=200000&&payments=36&purchase_date=2023-09-11
 @app.route('/api/purchase/new')
 def simulate_payment_plan():
     try:
