@@ -74,6 +74,7 @@ def insert_payment_plan(card_number, purchase_amount, purchase_date, installment
     payment_plan = PaymentPlan(card_number, purchase_date, purchase_amount)
 
     table = payment_plan.calc_payment_plan(credit_card, installments)
+
     for row in table:
         sql = f"""INSERT INTO payment_plans(
             Number, card_number, purchase_date, purchase_amount, payment_date, payment_amount, interest_amount,

@@ -10,9 +10,7 @@ import testControllerCreditCards
 
 
 class ControllerPaymentPlanTest(unittest.TestCase):
-    """
-    Tests for the Controller Class of the credit card
-    """
+    """Tests for the Controller Class of the payment plan"""
 
     # TEST FIXTURES
     # Code that runs before each test

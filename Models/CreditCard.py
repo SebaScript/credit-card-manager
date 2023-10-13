@@ -1,18 +1,30 @@
 from datetime import date
 import Exceptions
-
+from dataclasses import dataclass
 
 MAXANUALINTEREST = 100
 
 
+@dataclass
 class CreditCard:
     """
     Represents a credit card in the system
     """
+
+    card_number: str
+    owner_id: str
+    owner_name: str
+    bank_name: str
+    due_date: date
+    franchise: str
+    payment_day: int
+    monthly_fee: float
+    interest_rate: float
+
     def __init__(self, card_number, owner_id, owner_name, bank_name, due_date, franchise, payment_day, monthly_fee,
                  interest_rate):
-        self.card_number: int = card_number
-        self.owner_id: int = owner_id
+        self.card_number: str = card_number
+        self.owner_id: str = owner_id
         self.owner_name: str = owner_name
         self.bank_name: str = bank_name
         self.due_date: date = due_date

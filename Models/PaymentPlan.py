@@ -1,11 +1,22 @@
 from datetime import date, datetime, timedelta
 from Models.CreditCard import CreditCard
+from dataclasses import dataclass
 
 
+@dataclass
 class PaymentPlan:
     """
     Represents a payment plan in the system
     """
+
+    card_number: str
+    purchase_date: date
+    purchase_amount: float
+    payment_date: date
+    interest_amount: float
+    capital_amount: float
+    balance: float
+    payment_amount: float
     def __init__(self, card_number, purchase_date, purchase_amount):
         self.card_number: str = card_number
         self.purchase_date: date = purchase_date
