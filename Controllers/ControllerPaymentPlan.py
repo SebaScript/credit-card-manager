@@ -1,5 +1,7 @@
 import sys
 import psycopg2
+
+import Exceptions
 import SecretConfig
 from datetime import date
 from Models.CreditCard import CreditCard
@@ -67,7 +69,7 @@ def insert_payment_plan(card_number, purchase_amount, purchase_date, installment
     row = cursor.fetchone()
 
     if row is None:
-        raise Exception(f"record with card number: {card_number} was not found")
+        raise Exceptions.CardNotFoundError(f"Could not find the credit card {card_number}")
 
     credit_card = CreditCard(row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7], row[8])
 

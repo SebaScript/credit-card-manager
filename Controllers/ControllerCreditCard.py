@@ -85,7 +85,7 @@ def insert_credit_card(credit_card: CreditCard):
     except Exceptions.CardNotFoundError:
         pass
     except Exceptions.CreditCardAlreadyExists:
-        raise Exceptions.CreditCardAlreadyExists
+        raise Exceptions.CreditCardAlreadyExists(f"The credit card {card_number_search.card_number} already exists")
 
     try:
 
@@ -115,7 +115,7 @@ def search_by_card_id(card_number):
     row = cursor.fetchone()
 
     if row is None:
-        raise Exceptions.CardNotFoundError
+        raise Exceptions.CardNotFoundError(f"Could not found the credit card {card_number}")
 
     result = CreditCard(row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7], row[8])
     return result
