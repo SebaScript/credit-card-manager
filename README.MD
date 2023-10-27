@@ -13,6 +13,8 @@ pip install psycopg2
 
 - Open SecretConfig-Sample.py and follow the given instructions to initialize the project with your own database.
 
+- Create the tables in the database by executing the create_table() functions in ControllerCreditCard and ControllerPaymentPlan
+
 ## Tests
 
 Run the tests using the following command in your terminal:
