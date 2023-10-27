@@ -1,4 +1,4 @@
-#Credit card manager
+# Credit card manager
 
 Web software for managing credit cards and installment purchases applying Clean Code and using PostgreSQL Database.
 
@@ -6,14 +6,14 @@ Recommendation: due to file import issues, I recommend opening the software in P
 
 By: Juan Sebastian Garcia Perez
 
-##Database configuration
+## Database configuration
 
 - Run the following command to install PsycoPG2 on your project:
 pip install psycopg2
 
 - Open SecretConfig-Sample.py and follow the given instructions to initialize the project with your own database.
 
-##Tests
+## Tests
 
 Run the tests using the following command in your terminal:
 
