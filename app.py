@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, render_template
 
 from Controllers import ControllerCreditCard, ControllerPaymentPlan
 from Models.CreditCard import CreditCard
@@ -7,7 +7,33 @@ from datetime import date
 
 app = Flask(__name__)
 
+#Main window
+@app.route("/")
+def home():
+    return render_template("index.html")
+
+#/api/search/credit-card?card_number=123123
+@app.route("/api/search/credit-card")
+def search_credit_card():
+    try:
+        card_number = request.args["card_number"]
+
+        searched_credit_card = ControllerCreditCard.search_by_card_id(card_number)
+
+        return {
+            "status": "ok",
+            "message": "credit card searched succesfully",
+            "searched credit card": searched_credit_card
+        }
+
+    except Exception as err:
+        return {"status": "error",
+                "message": "Request could not be completed",
+                "error": str(err)}
+
+
 #/api/card/new?card_number=123123&owner_id=13124&owner_name=ola&bank_name=ola&due_date=2028-09-12&franchise=ola&payment_day=09&monthly_fee=12000&interest_rate=3
+
 @app.route('/api/card/new')
 def insert_credit_card():
     try:
