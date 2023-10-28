@@ -68,6 +68,5 @@ class CreditCard:
             payment_number += 1
             subtotal += round(monthly_amount + total_interest, 4)
             total_interest = round(self.interest_percentage * subtotal, 4)
-            print(payment_number)
             if subtotal >= total_amount:
                 return payment_number
