@@ -6,7 +6,19 @@
 </head>
 <body>
     <h1>Pagos pendientes</h1>
-    <br>
-    <h2>Por favor ingrese el rango de fecha en el que quiere consultar los pagos pendientes:</h2>
+    <p>Por favor ingrese el rango de fecha en el que quiere consultar los pagos pendientes:</p>
+
+    <form action="/view/calc/payments">
+
+    <div>
+        Desde: <input type="date" name="initial_date">
+    </div>
+    <div>
+        Hasta: <input type="date" name="final_date">
+    </div>
+        <input type="submit" value="Consultar">
+
+    </form>
+
 </body>
 </html>

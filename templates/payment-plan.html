@@ -2,18 +2,22 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Simular compra</title>
+    <title>Plan amortización</title>
 </head>
 <body>
-    <h1>Simular compra</h1>
+    <h1>Registrar compra</h1>
+    <br>
     <p>Por favor, ingresa los datos de la compra: </p>
     <br>
-    <form action="/view/simulate/purchase">
+    <form action="/view/insert/payment-plan">
         <div>
             Numero de la tarjeta de credito con la que va a realizar la compra: <input type="text" name="card_number">
         </div>
         <div>
             Monto total de la compra: <input type="number" step="0.01" name="purchase_amount">
+        </div>
+        <div>
+            Fecha de la compra: <input type="date" name="purchase_date">
         </div>
         <div>
             Numero total de cuotas: <input type="number" name="payments">
