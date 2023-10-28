@@ -52,7 +52,7 @@ class PaymentPlan:
                     self.payment_date = self.payment_date.replace(year=self.payment_date.year + 1, month=1)
                 else:
                     self.payment_date = self.payment_date.replace(month=self.payment_date.month + 1)
-                if 0 > self.balance > -0.1:
+                if 0.1 > self.balance > -0.1:
                     self.balance = 0
                 self.payment_amount = round(self.interest_amount + self.capital_amount, 2)
                 row: list = [payment_number, self.card_number, self.purchase_date, self.purchase_amount, self.payment_date,
