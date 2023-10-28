@@ -28,7 +28,7 @@ tests>python -m unittest discover . -p test*.py
 - Run the following command in your teminal to install flask:
     pip install flask
 
-- Execute the web server running the app.py module, then go to the adress given in the terminal and use the route you need.
+- Execute the web server running the app.py module, then go to the adress given in the terminal and use the route you need (you can guide yourself with the example routes in the code comments).
 
 ## Web UI
 
