@@ -25,14 +25,14 @@ tests>python -m unittest discover . -p test*.py
 
 ## Web service
 
-- Run the following command to install flask:
+- Run the following command in your teminal to install flask:
     pip install flask
 
 - Execute the web server running the app.py module, then go to the adress given in the terminal and use the route you need.
 
 ## Web UI
 
-- Run the following command to install flask:
+- Run the following command in your terminal to install flask:
     pip install flask
 
 - Execute the web user interface running the view.py module, then go to the adress given in the terminal and navigate between the different options.
