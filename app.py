@@ -7,10 +7,6 @@ from datetime import date
 
 app = Flask(__name__)
 
-#Main window
-@app.route("/")
-def home():
-    return render_template("index.html")
 
 #/api/search/credit-card?card_number=123123
 @app.route("/api/search/credit-card")
@@ -33,7 +29,6 @@ def search_credit_card():
 
 
 #/api/card/new?card_number=123123&owner_id=13124&owner_name=ola&bank_name=ola&due_date=2028-09-12&franchise=ola&payment_day=09&monthly_fee=12000&interest_rate=3
-
 @app.route('/api/card/new')
 def insert_credit_card():
     try:
@@ -91,7 +86,6 @@ def simulate_planned_saving():
     """
 
     try:
-
         card_number = request.args["card_number"]
         purchase_amount = float(request.args["purchase_amount"])
         payments = int(request.args["payments"])
