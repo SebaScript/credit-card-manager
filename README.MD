@@ -8,6 +8,12 @@ By: Juan Sebastian Garcia Perez
 
 ## Database configuration
 
+- Create an account on https://neon.tech/
+
+- Create a database on neondb.
+
+- Get the connection details in the dashboard of your database on neondb.
+
 - Run the following command to install PsycoPG2 on your project:
 pip install psycopg2
 
