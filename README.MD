@@ -8,6 +8,12 @@ By: Juan Sebastian Garcia Perez
 
 ## Database configuration
 
+- Create an account on https://neon.tech/
+
+- Create a database on neondb.
+
+- Get the connection details in the dashboard of your database on neondb.
+
 - Run the following command to install PsycoPG2 on your project:
 pip install psycopg2
 
@@ -28,7 +34,7 @@ tests>python -m unittest discover . -p test*.py
 - Run the following command in your teminal to install flask:
     pip install flask
 
-- Execute the web server running the app.py module, then go to the adress given in the terminal and use the route you need.
+- Execute the web server running the app.py module, then go to the adress given in the terminal and use the route you need (you can guide yourself with the example routes in the code comments).
 
 ## Web UI
 
