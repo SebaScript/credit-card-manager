@@ -119,3 +119,13 @@ def search_by_card_id(card_number):
 
     result = CreditCard(row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7], row[8])
     return result
+
+
+def delete_credit_card(card_number):
+    cursor = get_cursor()
+    try:
+        cursor.execute(f"DELETE FROM credit_cards WHERE card_number = '{card_number}'")
+        cursor.connection.commit()
+    except Exception as err:
+        print(err)
+        cursor.connection.rollback()

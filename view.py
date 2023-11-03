@@ -17,6 +17,11 @@ def home():
 def view_new_credit_card():
     return render_template("create-credit-card.html")
 
+#Window to delete a credit card
+@view.route("/view/delete-credit-card")
+def view_delete_credit_card():
+    return render_template("delete-credit-card.html")
+
 #Window to simulate a purchase
 @view.route("/view/simulate-purchase")
 def view_simulate_purchase():
@@ -116,6 +121,20 @@ def calc_payments():
         total = ControllerPaymentPlan.calc_total_payment_in_x_interval(date.fromisoformat(inintial_date), date.fromisoformat(final_date)    )
 
         result: str = f"El total a pagar desde {inintial_date} hasta {final_date} es: ${total}"
+
+        return result
+
+    except Exception as err:
+        return str(err)
+
+
+@view.route("/view/delete/credit-card")
+def delete_credit_card():
+    try:
+        card_number = request.args["card_number"]
+        ControllerCreditCard.delete_credit_card(card_number)
+
+        result: str = f"Se eliminó exitosamente la tarjeta de crédito con número: {card_number}"
 
         return result
 
